@@ -1,0 +1,14 @@
+def __init__(self, data):
+        self.connector = s3.connect(data)
+        self.cursor = self.connector.cursor()
+        self.cargas = [item[0] for item in self.cursor.execute('SELECT DISTINCT carga_name FROM Carga;').fetchall()]
+        self.descargas = [item[0] for item in self.cursor.execute('SELECT DISTINCT descarga_name FROM Descarga;').fetchall()]
+        self.dates = {datetime.datetime.utcfromtimestamp(int(item[0])).strftime('%Y-%m-%d'):item[0] for item in self.cursor.execute('SELECT DISTINCT turno_day FROM Turno WHERE turno_day>0;').fetchall()}
+
+    def __init__(self, data):
+        self.bytes = data.getvalue()
+
+        self.fp = pathlib.Path(str(uuid.uuid4()))
+        self.fp.write_bytes(self.bytes)
+        self.data = back.Basededatos(str(self.fp))
+        self.data.cursor.close()
