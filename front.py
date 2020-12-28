@@ -35,7 +35,7 @@ def main():
                         st.write('No existen ciclos')
     
             if st.sidebar.checkbox('Match Pala - Camión (No Hangs in db!):'):
-                st.success('Proximamente.....')
+                st.dataframe(datos.match_factor_front())
             if st.sidebar.checkbox('Availability + UoD'):
                 date = st.sidebar.radio('Dates:', list(datos.data.dates.keys()))
                 #converting date:
@@ -115,6 +115,10 @@ class Loading_file:
 
     def dist_prom(self):
         return self.data.distancia_promedio()
+
+    #Match Factor ... it needs some time + follow up
+    def match_factor_front(self):
+        return self.data.match_factor()    
 
     #Calling dispo_uoa_trucks
     def a_uod_trucks(self, turno):

@@ -36,6 +36,24 @@ class Basededatos:
         
         return pd.DataFrame(query)
 
+    #Match Factor
+    def match_factor(self):
+        query = pd.read_sql_query('SELECT turno_name as Turno, pala_name as Nombre_Pala, Viajes, no_Camiones as No_Camiones, CicloPala, CicloCamion, Camiones_esperado, ROUND(no_Camiones/Camiones_esperado,1) as MatchFactor\
+            FROM(SELECT turno_name, pala_name, COUNT(*) AS Viajes, COUNT(DISTINCT camion_id) AS no_Camiones, ROUND(AVG(cicloload_spot_time+cicloload_loading_time)/60,2) as CicloPala,\
+            ROUND(AVG(ciclodump_travel_time+ciclodump_dumping_time+cicloload_travel_time+cicloload_spot_time+cicloload_loading_time)/60,2) as CicloCamion,\
+            ROUND(AVG(ciclodump_travel_time+ciclodump_dumping_time+cicloload_travel_time+cicloload_spot_time+cicloload_loading_time)/AVG(cicloload_spot_time+cicloload_loading_time),0) AS Camiones_esperado\
+            FROM CicloDump\
+            INNER JOIN CicloLoad as cl ON cl.cicloload_id = CicloDump.ciclodump_prev_load_id\
+            INNER JOIN Carga ON Carga.carga_id = CicloDump.ciclodump_carga_id \
+            INNER JOIN Descarga ON Descarga.descarga_id = CicloDump.ciclodump_descarga_id\
+            INNER JOIN Pala ON Pala.pala_id = CicloDump.ciclodump_pala_id \
+            INNER JOIN Camion ON Camion.camion_id = CicloDump.ciclodump_camion_id \
+            INNER JOIN Turno ON Turno.turno_id = CicloDump.ciclodump_turno_id \
+            WHERE CicloDump.ciclodump_prev_load_id <> 0 \
+            GROUP BY turno_name, pala_name\
+            HAVING COUNT(*)>50);', self.connector)
+        return pd.DataFrame(query)
+
     #Availability and UoD  - Trucks     
     def disp_uoa_trucks(self, turno):
         query = pd.read_sql_query('SELECT modelo_name as Truck_Model, ROUND(SUM(CASE WHEN if_indicador = "DISP" THEN if_valor ELSE 0 END)/SUM(CASE WHEN if_indicador = "NOM" THEN if_valor ELSe 1 END)*100,1) as Availability,\
