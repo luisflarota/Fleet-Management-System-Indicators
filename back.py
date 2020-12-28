@@ -29,7 +29,7 @@ class Basededatos:
         return pd.DataFrame(query)
     #Distancias:
     def distancia_promedio(self):
-        query = pd.read_sql_query('SELECT descargatype_name AS Descarga, ROUND(AVG(CicloDump.ciclodump_travel_distance)/1000,2) as Distancia_km, COUNT(*) AS Viajes FROM CicloDump\
+        query = pd.read_sql_query('SELECT descargatype_name AS Descarga, ROUND(AVG(CicloDump.ciclodump_travel_distance)/1000,2) as Distance_km, COUNT(*) AS Viajes FROM CicloDump\
                           INNER JOIN Descarga ON Descarga.descarga_id = CicloDump.ciclodump_descarga_id\
                           INNER JOIN DescargaType ON DescargaType.descargatype_id = Descarga.descarga_type\
                           GROUP BY descargatype_name;', self.connector)
