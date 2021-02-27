@@ -23,9 +23,9 @@
 
     - Is it that we need to add/substract truck from a specific loader?. *The app handles it based on the well-know formula*
 
-    <img src="https://latex.codecogs.com/gif.latex?Trucks-needed&space;=&space;\frac{Dumptravel_t&space;&plus;&space;Dumping_t&space;&plus;&space;Loadtrave_t&space;&plus;&space;Spot_t&space;&plus;&space;Load_t}{Spot_t&space;&plus;&space;Load_t}" title="Camiones-esperado = \frac{Dumptravel_t + Dumping_t + Loadtrave_t + Spot_t + Load_t}{Spot_t + Load_t}" />
+        * <img src="https://latex.codecogs.com/gif.latex?Trucks-needed&space;=&space;\frac{Dumptravel_t&space;&plus;&space;Dumping_t&space;&plus;&space;Loadtrave_t&space;&plus;&space;Spot_t&space;&plus;&space;Load_t}{Spot_t&space;&plus;&space;Load_t}" title="Camiones-esperado = \frac{Dumptravel_t + Dumping_t + Loadtrave_t + Spot_t + Load_t}{Spot_t + Load_t}" />
 
-    <img src="https://latex.codecogs.com/gif.latex?Match-factor&space;=&space;\frac{Trucks&space;(actual)}{Trucks-needed}" title="Match-factor = \frac{Trucks (actual)}{Trucks-needed}" />
+        * <img src="https://latex.codecogs.com/gif.latex?Match-factor&space;=&space;\frac{Trucks&space;(actual)}{Trucks-needed}" title="Match-factor = \frac{Trucks (actual)}{Trucks-needed}" />
 
     
     ![Inkedtruck_needed_LI](https://user-images.githubusercontent.com/64980133/109398013-17260900-7908-11eb-9efa-28c9b820eebc.jpg)
